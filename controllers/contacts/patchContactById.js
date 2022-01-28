@@ -2,18 +2,17 @@ const createError = require("http-errors");
 
 const {Contact} = require('../../models');
 
+const {favoriteJoiSchema} = require('../../models/contactDB');
 
-const {joiSchema} = require('../../models/contactDB')
-
-const updateContactById = async(req, res, next)=> {
+const patchContactById = async(req, res, next)=> {
   try {
-      const {error} = joiSchema.validate(req.body)
+      const {error} = favoriteJoiSchema.validate(req.body)
       if(error) {
         throw new createError(400, error.message)
       }
        const {id} = req.params;
-       
-       const result = await Contact.findByIdAndUpdate(id, req.body, {new: true})
+       const {favorite} = req.body;
+       const result = await Contact.findByIdAndUpdate(id, {favorite}, {new: true})
        if(!result) {
         throw new createError (404, "not found contact")      
       }
@@ -23,4 +22,4 @@ const updateContactById = async(req, res, next)=> {
   }
 }
 
-module.exports = updateContactById;
+module.exports = patchContactById;
