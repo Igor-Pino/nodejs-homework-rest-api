@@ -2,7 +2,7 @@ const createError = require("http-errors");
 
 const {Contact} = require('../../models');
 
-const {favoriteJoiSchema} = require('../../models/contactDB');
+const {favoriteJoiSchema} = require('../../models/contact');
 
 const patchContactById = async(req, res, next)=> {
   try {

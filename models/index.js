@@ -1,3 +1,3 @@
-const Contact = require('./contactDB')
+const Contact = require('./contact')
 
 module.exports = Contact

@@ -31,7 +31,7 @@ const joiSchema = Joi.object({
     .max(20)
     .required(), 
     email: Joi.string()
-    .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] }})
+    .email({ minDomainSegments: 2})
     .required(),  
     favorite: Joi.bool()
   })

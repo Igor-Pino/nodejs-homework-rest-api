@@ -3,7 +3,7 @@ const createError = require("http-errors");
 const {Contact} = require('../../models');
 
 
-const {joiSchema} = require('../../models/contactDB')
+const {joiSchema} = require('../../models/contact')
 
 const updateContactById = async(req, res, next)=> {
   try {
