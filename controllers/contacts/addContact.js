@@ -13,9 +13,7 @@ const addContact = async(req, res, next)=> {
         const newContact = await Contact.create(req.body); 
         res.status(201).json(newContact);
     } catch (error) {
-        if(error.message.includes('validation failed')){
-            error.status = 400;
-        }
+        
         next(error);
     }
 }
