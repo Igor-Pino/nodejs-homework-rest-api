@@ -1,5 +1,6 @@
-const createError = require("http-errors");
 
+const createError = require("http-errors");
+const ObjectId = require('mongoose').Types.ObjectId;
 const {Contact} = require('../../models');
 
 const {favoriteJoiSchema} = require('../../models/contact');
@@ -11,6 +12,9 @@ const patchContactById = async(req, res, next)=> {
         throw new createError(400, error.message)
       }
        const {id} = req.params;
+       if (!ObjectId.isValid(id)) {
+        throw new createError (404, "Invalid id");
+      }
        const {favorite} = req.body;
        const result = await Contact.findByIdAndUpdate(id, {favorite}, {new: true})
        if(!result) {
@@ -21,5 +25,6 @@ const patchContactById = async(req, res, next)=> {
       next(error)
   }
 }
+
 
 module.exports = patchContactById;

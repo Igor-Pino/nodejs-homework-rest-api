@@ -1,3 +1,6 @@
+const createError = require("http-errors");
+const ObjectId = require('mongoose').Types.ObjectId;
+
 
 const {Contact} = require('../../models');
 
@@ -6,6 +9,9 @@ const {Contact} = require('../../models');
 const removeContactById = async(req, res, next)=> {
     try {
         const {id} = req.params;
+        if (!ObjectId.isValid(id)) {
+            throw new createError (404, "Invalid id");
+        }
         const result = await Contact.findByIdAndRemove(id);  
         if(!result) {
           throw new createError (404, "not found contact")      
