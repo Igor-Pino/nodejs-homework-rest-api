@@ -1,19 +1,27 @@
 
 const createError = require("http-errors");
 
-const contacts = require('../../models/contacts');
+const ObjectId = require('mongoose').Types.ObjectId;
+
+const {Contact} = require('../../models');
 
 const getContactById = async(req, res, next)=> {
-    try {
-        const {id} = req.params
-        const result = await contacts.getContactById(id);
-          if(!result) {
-            throw new createError (404, "not found contact")      
+  try {
+      const {id} = req.params
+      if (!ObjectId.isValid(id)) {
+        throw new createError (404, "Invalid id");
       }
-        res.json(result)
-    } catch (error) {
-        next(error)
+      const result = await Contact.findById(id);
+        if(!result) {
+          throw new createError (404, "not found contact")      
     }
+      res.json(result)
+  } catch (error) {
+
+    next(error)
+  }
 }
 
 module.exports = getContactById;
+
+

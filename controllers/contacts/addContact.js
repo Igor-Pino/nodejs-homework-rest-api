@@ -1,18 +1,19 @@
 const createError = require('http-errors');
 
-const contacts = require('../../models/contacts');
-const {contactsSchema} = require('../../schemas');
+const {Contact} = require('../../models');
+
+const {joiSchema} = require('../../models/contact');
 
 const addContact = async(req, res, next)=> {
     try {
-        const {error} = contactsSchema.validate(req.body);
+        const {error} = joiSchema.validate(req.body);
         if(error){
             throw new createError(400, error.message)
         }
-        const {name, phone, email} = req.body;
-        const newContact = await contacts.addContact(name, phone, email); 
+        const newContact = await Contact.create(req.body); 
         res.status(201).json(newContact);
     } catch (error) {
+        
         next(error);
     }
 }

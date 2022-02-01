@@ -13,6 +13,8 @@ router.post("/", ctrl.addContact);
 
 router.put("/:id", ctrl.updateContactById);
 
+router.patch("/:id/favorite", ctrl.patchContactById);
+
 router.delete("/:id", ctrl.removeContactById);
 
 
