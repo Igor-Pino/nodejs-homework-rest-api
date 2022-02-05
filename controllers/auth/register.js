@@ -2,7 +2,7 @@ const createError = require('http-errors');
 const {Conflict} = require('http-errors');
 const {User} = require('../../models');
 
-const {joiSchema} = require('../../models/user');
+const {joiSchema} = require('../../models/users');
 
 const bcrypt = require('bcrypt');
 

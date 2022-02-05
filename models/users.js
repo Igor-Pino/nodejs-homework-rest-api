@@ -20,7 +20,7 @@ const bcrypt = require('bcrypt');
       },
       token: {
         type: String,
-        default: null,
+        default: "",
       }, 
 
 }, {versionKey: false, timestamps: true})
