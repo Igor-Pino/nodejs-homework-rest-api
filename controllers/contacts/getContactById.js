@@ -11,7 +11,8 @@ const getContactById = async(req, res, next)=> {
       if (!ObjectId.isValid(id)) {
         throw new createError (404, "Invalid id");
       }
-      const result = await Contact.findById(id);
+      const {_id} = req.user
+      const result = await Contact.findOne({owner:_id, _id: id}, "-createdAt -updatedAt").populate("owner", "email");
         if(!result) {
           throw new createError (404, "not found contact")      
     }

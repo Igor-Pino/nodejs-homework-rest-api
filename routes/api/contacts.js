@@ -9,15 +9,15 @@ const {auth} = require('../../middlewares');
 
 router.get("/", auth, ctrl.getAllContacts)
 
-router.get("/:id", ctrl.getContactById);
+router.get("/:id", auth, ctrl.getContactById);
 
 router.post("/", auth, ctrl.addContact);
 
-router.put("/:id", ctrl.updateContactById);
+router.put("/:id", auth, ctrl.updateContactById);
 
-router.patch("/:id/favorite", ctrl.patchContactById);
+router.patch("/:id/favorite", auth, ctrl.patchContactById);
 
-router.delete("/:id", ctrl.removeContactById);
+router.delete("/:id", auth, ctrl.removeContactById);
 
 
 

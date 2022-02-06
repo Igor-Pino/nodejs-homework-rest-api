@@ -6,9 +6,6 @@ const {joiSchema} = require('../../models/users');
 
 const bcrypt = require('bcrypt');
 
-
-
-
 const register = async (req, res, next) => {
     try {
         const {error} = joiSchema.validate(req.body);
@@ -20,9 +17,9 @@ const register = async (req, res, next) => {
         if(userCheck) {
             throw new Conflict ('it is exist')
         }
-        else {
-            const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-            const user = await User.create({email, password: hashPassword}); 
+        const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
+        const user = await User.create({email, password: hashPassword}); 
+        
         res.status(201).json({
             user:{
                 "email": email,
@@ -30,7 +27,7 @@ const register = async (req, res, next) => {
             }
 
         })
-    };
+    
     } catch (error) {
         
         next(error);

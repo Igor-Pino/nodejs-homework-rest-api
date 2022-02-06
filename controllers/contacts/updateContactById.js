@@ -15,8 +15,8 @@ const updateContactById = async(req, res, next)=> {
        if (!ObjectId.isValid(id)) {
         throw new createError (404, "Invalid id");
       }
-       
-       const result = await Contact.findByIdAndUpdate(id, req.body, {new: true})
+       const {_id} = req.user
+       const result = await Contact.findOneAndUpdate({owner:_id, _id: id}, req.body, {new: true})
        if(!result) {
         throw new createError (404, "not found contact")      
       }

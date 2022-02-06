@@ -12,7 +12,8 @@ const removeContactById = async(req, res, next)=> {
         if (!ObjectId.isValid(id)) {
             throw new createError (404, "Invalid id");
         }
-        const result = await Contact.findByIdAndRemove(id);  
+        const {_id} = req.user
+        const result = await Contact.findOneAndRemove({owner:_id, _id: id});  
         if(!result) {
           throw new createError (404, "not found contact")      
         }
