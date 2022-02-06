@@ -15,20 +15,19 @@ const register = async (req, res, next) => {
         if(error){
             throw new createError(400, error.message)
         }
-        const {email, password, subscription='starter'} = req.body;
-        const user = await User.findOne({email});
-        if(user) {
+        const {email, password} = req.body;
+        const userCheck = await User.findOne({email});
+        if(userCheck) {
             throw new Conflict ('it is exist')
         }
         else {
             const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
-            const result = await User.create({email, password: hashPassword, subscription}); 
+            const user = await User.create({email, password: hashPassword}); 
         res.status(201).json({
-            user: {
-                email,
-                subscription 
-                         
-              }
+            user:{
+                "email": email,
+                "subscription": user.subscription
+            }
 
         })
     };
