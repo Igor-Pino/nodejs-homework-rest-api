@@ -18,15 +18,14 @@ const register = async (req, res, next) => {
         }
         const hashPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 
-        const avatarURL = gravatar.url(email);
+        const avatarURL = gravatar.url(email, {protocol: true});
 
         const user = await User.create({email, avatarURL, password: hashPassword}); 
         
         res.status(201).json({
             user:{
                 "email": email,
-                "subscription": user.subscription,
-                "avatarURL": avatarURL
+                "subscription": user.subscription                
             }
 
         })
