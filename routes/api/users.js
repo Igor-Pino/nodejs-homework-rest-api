@@ -15,4 +15,6 @@ router.patch("/:id/subscription", ctrl.patchUser);
 
 router.patch('/avatars', auth, upload.single('avatar'), resizeAvatar, ctrl.patchAvatar)
 
+
+
 module.exports = router
