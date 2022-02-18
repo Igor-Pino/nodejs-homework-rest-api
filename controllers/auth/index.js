@@ -5,6 +5,7 @@ const logout = require ('./logout');
 const patchUser = require ('./patchUser');
 const patchAvatar = require ('./patchAvatar');
 const emailVerify = require('./emailVerify');
+const emailReValidation = require ('./emailReValidation')
 
 
 
@@ -15,6 +16,7 @@ module.exports = {
     logout,
     patchUser,    
     patchAvatar,
-    emailVerify    
+    emailVerify,
+    emailReValidation    
     
 }

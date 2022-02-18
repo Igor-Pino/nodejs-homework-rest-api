@@ -56,6 +56,13 @@ const subscriptionJoiSchema = Joi.object({
     
 })
 
+const emailVerifySchema = Joi.object({
+  email: Joi.string()
+  .email({ minDomainSegments: 2})
+  .required(), 
+  
+})
+
 userSchema.methods.comparePasswords = function (password) {
   return bcrypt.compareSync(password, this.password)
 }
@@ -66,5 +73,6 @@ const User = model("user", userSchema);
 module.exports = {
     User,
     joiSchema,
-    subscriptionJoiSchema
+    subscriptionJoiSchema,
+    emailVerifySchema
 }
