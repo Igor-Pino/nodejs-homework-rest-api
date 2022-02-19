@@ -14,7 +14,7 @@ const emailReValidation = async (req, res, next) => {
 
         const user = await User.findOne({email});  
         if(user.verify) {
-            throw new createError (400, 'email already verified')
+            throw new createError (400, 'Verification has already been passed')
         }     
        
         const mail = {
